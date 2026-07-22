@@ -1379,8 +1379,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             // This TV box maps the physical Escape key (Linux scan code 1) to
             // Android BACK. Distinguish it from other BACK events and send Esc.
             if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-                short translated = event.getScanCode() == 1 ?
-                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME;
+                short translated = (short) (event.getScanCode() == 1 ?
+                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME);
                 conn.sendKeyboardInput(translated, KeyboardPacket.KEY_DOWN,
                         getModifierState(event), MoonBridge.SS_KBE_FLAG_NON_NORMALIZED);
                 return true;
@@ -1468,8 +1468,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         if (!handled) {
             // See the matching key-down handling above.
             if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-                short translated = event.getScanCode() == 1 ?
-                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME;
+                short translated = (short) (event.getScanCode() == 1 ?
+                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME);
                 conn.sendKeyboardInput(translated, KeyboardPacket.KEY_UP,
                         getModifierState(event), MoonBridge.SS_KBE_FLAG_NON_NORMALIZED);
                 return true;
