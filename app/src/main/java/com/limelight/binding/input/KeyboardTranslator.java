@@ -206,12 +206,6 @@ public class KeyboardTranslator implements InputManager.InputDeviceListener {
                 translated = 0x0d;
                 break;
 
-            // Some Android TV boxes map the Escape key on physical keyboards
-            // to Android's BACK key. Forward it as the Windows Home key.
-            case KeyEvent.KEYCODE_BACK:
-                translated = VK_HOME;
-                break;
-
             case KeyEvent.KEYCODE_PLUS:
             case KeyEvent.KEYCODE_EQUALS:
                 translated = 0xbb;

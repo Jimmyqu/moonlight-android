@@ -1376,6 +1376,16 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
         // Try the keyboard handler if it wasn't handled as a game controller
         if (!handled) {
+            // This TV box maps the physical Escape key (Linux scan code 1) to
+            // Android BACK. Distinguish it from other BACK events and send Esc.
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                short translated = event.getScanCode() == 1 ?
+                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME;
+                conn.sendKeyboardInput(translated, KeyboardPacket.KEY_DOWN,
+                        getModifierState(event), MoonBridge.SS_KBE_FLAG_NON_NORMALIZED);
+                return true;
+            }
+
             // Let this method take duplicate key down events
             if (handleSpecialKeys(event.getKeyCode(), true)) {
                 return true;
@@ -1456,6 +1466,15 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
         // Try the keyboard handler if it wasn't handled as a game controller
         if (!handled) {
+            // See the matching key-down handling above.
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                short translated = event.getScanCode() == 1 ?
+                        KeyboardTranslator.VK_ESCAPE : KeyboardTranslator.VK_HOME;
+                conn.sendKeyboardInput(translated, KeyboardPacket.KEY_UP,
+                        getModifierState(event), MoonBridge.SS_KBE_FLAG_NON_NORMALIZED);
+                return true;
+            }
+
             if (handleSpecialKeys(event.getKeyCode(), false)) {
                 return true;
             }
