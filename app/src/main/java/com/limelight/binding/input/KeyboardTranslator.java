@@ -200,6 +200,9 @@ public class KeyboardTranslator implements InputManager.InputDeviceListener {
                 break;
                 
             case KeyEvent.KEYCODE_ENTER:
+            // Some Android TV boxes map the Enter key on physical keyboards
+            // to DPAD_CENTER. Forward both forms as the Windows Enter key.
+            case KeyEvent.KEYCODE_DPAD_CENTER:
                 translated = 0x0d;
                 break;
 
